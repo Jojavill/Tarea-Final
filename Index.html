@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Los Estados de la Materia: Aprende Jugando</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e0f7fa;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: #0288d1;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    #visual {
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: white;
+      transition: all 0.8s ease;
+    }
+
+    .solido {
+      background-color: #1565c0;
+    }
+
+    .liquido {
+      background-color: #4fc3f7;
+    }
+
+    .gaseoso {
+      background-color: #ffeb3b;
+      color: #000;
+    }
+
+    .text-box {
+      background: #ffffffcc;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
+    button {
+      background-color: #00897b;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00695c;
+    }
+
+    @media (max-width: 600px) {
+      #visual {
+        width: 200px;
+        height: 200px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Los Estados de la Materia: Aprende Jugando
+  </header>
+
+  <div class="container">
+    <div id="visual" class="solido">
+      Sólido
+    </div>
+
+    <div class="text-box" id="descripcion">
+      En estado sólido, las partículas están muy juntas y casi no se mueven. Ejemplo: el hielo.
+    </div>
+
+    <div>
+      <button onclick="siguientePaso()">Paso siguiente</button>
+      <button onclick="reiniciar()">Nuevo ciclo</button>
+      <button onclick="verTodo()">Ver todo el proceso</button>
+    </div>
+  </div>
+
+  <script>
+    const visual = document.getElementById("visual");
+    const descripcion = document.getElementById("descripcion");
+
+    const estados = [
+      {
+        nombre: "Sólido",
+        clase: "solido",
+        descripcion:
+          "En estado sólido, las partículas están muy juntas y casi no se mueven. Ejemplo: el hielo."
+      },
+      {
+        nombre: "Líquido",
+        clase: "liquido",
+        descripcion:
+          "En estado líquido, las partículas se mueven un poco más y toman la forma del recipiente. Ejemplo: el agua."
+      },
+      {
+        nombre: "Gaseoso",
+        clase: "gaseoso",
+        descripcion:
+          "En estado gaseoso, las partículas se mueven libremente y se expanden. Ejemplo: el vapor."
+      },
+      {
+        nombre: "Condensación",
+        clase: "liquido",
+        descripcion:
+          "La condensación ocurre cuando un gas se enfría y se convierte en líquido. Ejemplo: el vapor se convierte en agua."
+      },
+      {
+        nombre: "Solidificación",
+        clase: "solido",
+        descripcion:
+          "La solidificación ocurre cuando un líquido se enfría y se convierte en sólido. Ejemplo: el agua se convierte en hielo."
+      }
+    ];
+
+    let paso = 0;
+
+    function mostrarEstado(index) {
+      visual.className = estados[index].clase;
+      visual.textContent = estados[index].nombre;
+      descripcion.textContent = estados[index].descripcion;
+    }
+
+    function siguientePaso() {
+      paso++;
+      if (paso >= estados.length) paso = 0;
+      mostrarEstado(paso);
+    }
+
+    function reiniciar() {
+      paso = 0;
+      mostrarEstado(paso);
+    }
+
+    function verTodo() {
+      let delay = 0;
+      for (let i = 0; i < estados.length; i++) {
+        setTimeout(() => {
+          mostrarEstado(i);
+        }, delay);
+        delay += 2500;
+      }
+    }
+  </script>
+</body>
+</html>
